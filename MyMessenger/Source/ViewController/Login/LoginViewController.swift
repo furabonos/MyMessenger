@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
-
+    
     @IBOutlet weak var goBtnBottom: NSLayoutConstraint!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var idField: UITextField!
@@ -22,7 +22,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         ref = Database.database().reference()
         setupInitialize()
         passwordField.delegate = self
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
         //로그아웃
         let firebaseAuth = Auth.auth()
         do {
@@ -37,22 +36,31 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+        print("LoginViewController Deinit")
+    }
+    
     func setupInitialize() {
         passwordField.isSecureTextEntry = true
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(noti:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
     }
     
     @objc func keyboardWillShow(_ sender: Notification) {
         self.view.frame.origin.y = -150 // Move view 150 points upward
     }
-
+    @objc private func keyboardWillHide(noti: Notification) {
+        self.view.frame.origin.y = self.view.frame.origin.y + 150
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.frame.origin.y = self.view.frame.origin.y + 150
         self.view.endEditing(true)
     }
     
@@ -66,15 +74,15 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         print("error = \(error)")
                         return;
                     }
-//                    print("token = \(token!)")
-//                    print("name = \(UserDefaults.standard.string(forKey: "name")!)")
+                    //                    print("token = \(token!)")
+                    //                    print("name = \(UserDefaults.standard.string(forKey: "name")!)")
                     guard let tokens = token else { return }
                     print("tokens = \(tokens)")
                     let currentUser = self.ref.child("Users").child(tokens)
-//                    currentUser.setValue([
-//                        "token": tokens,
-//                        "name": UserDefaults.standard.string(forKey: "name")!
-//                        ])
+                    //                    currentUser.setValue([
+                    //                        "token": tokens,
+                    //                        "name": UserDefaults.standard.string(forKey: "name")!
+                    //                        ])
                 }
                 
             }
@@ -82,33 +90,33 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 print("login fail")
             }
         }
-//        Auth.auth().signIn(withEmail: self.idField.text!, password: self.passwordField.text!) { (result) in
-//            switch result {
-//            case .success(let value):
-//                print("로그인 성공")
-//
-//                UserDefaults.standard.set(value.token, forKey: "CurrentUserToken")
-//                print("CurrentUserToken : ",UserDefaults.standard.string(forKey: "CurrentUserToken"))
-//                let currentUser = self.ref.child("Users").child(value.token)
-//                currentUser.setValue([
-//                    "token":value.token,
-//                    "firstName":value.user.firstName,
-//                    "lastName":value.user.lastName,
-//                    "profileImage":value.user.profileImage ?? "",
-//                    "birthday":value.user.birthday ?? "",
-//                    "isHost":value.user.isHost,
-//                    "createDate":value.user.createDate])
-//
-//                let mainVC = MoveStoryboard.toVC(storybardName: "Main", identifier: "MainExploring")
-//                self.show(mainVC, sender: nil)
-//
-//
-//            case .failure(let response, let error):
-//                print(error)
-//            }
-//
-//    }
+        //        Auth.auth().signIn(withEmail: self.idField.text!, password: self.passwordField.text!) { (result) in
+        //            switch result {
+        //            case .success(let value):
+        //                print("로그인 성공")
+        //
+        //                UserDefaults.standard.set(value.token, forKey: "CurrentUserToken")
+        //                print("CurrentUserToken : ",UserDefaults.standard.string(forKey: "CurrentUserToken"))
+        //                let currentUser = self.ref.child("Users").child(value.token)
+        //                currentUser.setValue([
+        //                    "token":value.token,
+        //                    "firstName":value.user.firstName,
+        //                    "lastName":value.user.lastName,
+        //                    "profileImage":value.user.profileImage ?? "",
+        //                    "birthday":value.user.birthday ?? "",
+        //                    "isHost":value.user.isHost,
+        //                    "createDate":value.user.createDate])
+        //
+        //                let mainVC = MoveStoryboard.toVC(storybardName: "Main", identifier: "MainExploring")
+        //                self.show(mainVC, sender: nil)
+        //
+        //
+        //            case .failure(let response, let error):
+        //                print(error)
+        //            }
+        //
+        //    }
     }
     
-
+    
 }
