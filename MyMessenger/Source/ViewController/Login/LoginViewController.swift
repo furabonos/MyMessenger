@@ -90,32 +90,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 print("login fail")
             }
         }
-        //        Auth.auth().signIn(withEmail: self.idField.text!, password: self.passwordField.text!) { (result) in
-        //            switch result {
-        //            case .success(let value):
-        //                print("로그인 성공")
-        //
-        //                UserDefaults.standard.set(value.token, forKey: "CurrentUserToken")
-        //                print("CurrentUserToken : ",UserDefaults.standard.string(forKey: "CurrentUserToken"))
-        //                let currentUser = self.ref.child("Users").child(value.token)
-        //                currentUser.setValue([
-        //                    "token":value.token,
-        //                    "firstName":value.user.firstName,
-        //                    "lastName":value.user.lastName,
-        //                    "profileImage":value.user.profileImage ?? "",
-        //                    "birthday":value.user.birthday ?? "",
-        //                    "isHost":value.user.isHost,
-        //                    "createDate":value.user.createDate])
-        //
-        //                let mainVC = MoveStoryboard.toVC(storybardName: "Main", identifier: "MainExploring")
-        //                self.show(mainVC, sender: nil)
-        //
-        //
-        //            case .failure(let response, let error):
-        //                print(error)
-        //            }
-        //
-        //    }
     }
     
     

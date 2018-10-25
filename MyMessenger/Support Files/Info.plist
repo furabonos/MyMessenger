@@ -2,8 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>FirebaseScreenReportingEnabled</key>
-	<false/>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>앨범에 접근을 허용하시겠습니까?</string>
+	<key>NSCameraUsageDescription</key>
+	<string>카메라 사용을 허용하시겠습니까?</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -25,7 +27,7 @@
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
-	<string>Login</string>
+	<string>Profile</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

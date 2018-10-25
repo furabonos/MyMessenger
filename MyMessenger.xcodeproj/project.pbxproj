@@ -22,6 +22,7 @@
 		87330778217EF33F00169D1B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87330777217EF33F00169D1B /* Main.storyboard */; };
 		8733077A217EF59400169D1B /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87330779217EF59400169D1B /* Profile.storyboard */; };
 		8733077D217EF5C200169D1B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8733077C217EF5C200169D1B /* ProfileViewController.swift */; };
+		8733077F2180564300169D1B /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8733077E2180564300169D1B /* ProfileEditViewController.swift */; };
 		E1B08809F0E7658FE89B3DD1 /* Pods_MyMessenger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A610169FAA2637594B75185C /* Pods_MyMessenger.framework */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +46,7 @@
 		87330777217EF33F00169D1B /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		87330779217EF59400169D1B /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		8733077C217EF5C200169D1B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		8733077E2180564300169D1B /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
 		A610169FAA2637594B75185C /* Pods_MyMessenger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyMessenger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -193,6 +195,7 @@
 			isa = PBXGroup;
 			children = (
 				8733077C217EF5C200169D1B /* ProfileViewController.swift */,
+				8733077E2180564300169D1B /* ProfileEditViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -331,6 +334,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				87330768217C591F00169D1B /* RegisterViewController.swift in Sources */,
+				8733077F2180564300169D1B /* ProfileEditViewController.swift in Sources */,
 				8733076E217C6B1800169D1B /* Regex.swift in Sources */,
 				87330772217DA28400169D1B /* RegisterNameViewController.swift in Sources */,
 				87330770217DA25800169D1B /* MoveToStoryboard.swift in Sources */,
