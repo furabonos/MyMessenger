@@ -18,11 +18,14 @@
 		87330770217DA25800169D1B /* MoveToStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8733076F217DA25800169D1B /* MoveToStoryboard.swift */; };
 		87330772217DA28400169D1B /* RegisterNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87330771217DA28400169D1B /* RegisterNameViewController.swift */; };
 		87330774217DADF500169D1B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 87330773217DADF500169D1B /* GoogleService-Info.plist */; };
-		87330776217EEC7300169D1B /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87330775217EEC7300169D1B /* UserInfo.swift */; };
+		87330776217EEC7300169D1B /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87330775217EEC7300169D1B /* UserManager.swift */; };
 		87330778217EF33F00169D1B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87330777217EF33F00169D1B /* Main.storyboard */; };
 		8733077A217EF59400169D1B /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87330779217EF59400169D1B /* Profile.storyboard */; };
 		8733077D217EF5C200169D1B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8733077C217EF5C200169D1B /* ProfileViewController.swift */; };
 		8733077F2180564300169D1B /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8733077E2180564300169D1B /* ProfileEditViewController.swift */; };
+		873307812185A24200169D1B /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873307802185A24200169D1B /* UserInfo.swift */; };
+		873307832185A2BB00169D1B /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873307822185A2BB00169D1B /* UserService.swift */; };
+		873307852185B3F600169D1B /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873307842185B3F600169D1B /* App.swift */; };
 		E1B08809F0E7658FE89B3DD1 /* Pods_MyMessenger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A610169FAA2637594B75185C /* Pods_MyMessenger.framework */; };
 /* End PBXBuildFile section */
 
@@ -42,11 +45,14 @@
 		8733076F217DA25800169D1B /* MoveToStoryboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveToStoryboard.swift; sourceTree = "<group>"; };
 		87330771217DA28400169D1B /* RegisterNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterNameViewController.swift; sourceTree = "<group>"; };
 		87330773217DADF500169D1B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		87330775217EEC7300169D1B /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		87330775217EEC7300169D1B /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		87330777217EF33F00169D1B /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		87330779217EF59400169D1B /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		8733077C217EF5C200169D1B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		8733077E2180564300169D1B /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
+		873307802185A24200169D1B /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		873307822185A2BB00169D1B /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		873307842185B3F600169D1B /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		A610169FAA2637594B75185C /* Pods_MyMessenger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyMessenger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -143,7 +149,8 @@
 		8733075B2179C4A100169D1B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				87330775217EEC7300169D1B /* UserInfo.swift */,
+				87330775217EEC7300169D1B /* UserManager.swift */,
+				873307802185A24200169D1B /* UserInfo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -161,6 +168,7 @@
 		8733075D2179C4BB00169D1B /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				873307842185B3F600169D1B /* App.swift */,
 				8733076D217C6B1800169D1B /* Regex.swift */,
 				8733076F217DA25800169D1B /* MoveToStoryboard.swift */,
 			);
@@ -170,6 +178,7 @@
 		8733075E2179C4C200169D1B /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				873307822185A2BB00169D1B /* UserService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -339,8 +348,11 @@
 				87330772217DA28400169D1B /* RegisterNameViewController.swift in Sources */,
 				87330770217DA25800169D1B /* MoveToStoryboard.swift in Sources */,
 				873307622179C79300169D1B /* LoginViewController.swift in Sources */,
-				87330776217EEC7300169D1B /* UserInfo.swift in Sources */,
+				873307832185A2BB00169D1B /* UserService.swift in Sources */,
+				87330776217EEC7300169D1B /* UserManager.swift in Sources */,
 				8733077D217EF5C200169D1B /* ProfileViewController.swift in Sources */,
+				873307852185B3F600169D1B /* App.swift in Sources */,
+				873307812185A24200169D1B /* UserInfo.swift in Sources */,
 				873307462179C16600169D1B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

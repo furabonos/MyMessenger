@@ -29,6 +29,11 @@ class RegisterViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+        print("RegisterViewController Deinit")
+    }
+    
     func goNext() {
         if emailImage.image == UIImage(named: "Check.png") , passwordImage.image == UIImage(named: "Check.png") {
             goBtn.isEnabled = true
@@ -52,6 +57,7 @@ class RegisterViewController: UIViewController {
         
         let registerNameVC = MoveStoryboard.toVC(storybardName: "Register", identifier: "RegisterNameViewController")
         self.navigationController?.pushViewController(registerNameVC, animated: true)
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

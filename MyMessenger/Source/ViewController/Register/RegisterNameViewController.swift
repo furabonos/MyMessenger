@@ -17,6 +17,8 @@ class RegisterNameViewController: UIViewController {
     @IBOutlet weak var goBtn: UIButton!
     @IBOutlet weak var goBtnBottom: NSLayoutConstraint!
     
+    private var ref: DatabaseReference!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupInitialize()
@@ -28,7 +30,13 @@ class RegisterNameViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+        print("RegisterNameViewController Deinit")
+    }
+    
     func setupInitialize() {
+        ref = Database.database().reference()
 //        goBtn.isEnabled = false
 //        goBtn.setTitleColor(.gray, for: .normal)
     }
@@ -85,10 +93,21 @@ class RegisterNameViewController: UIViewController {
         ) { (user, error) in
             if user !=  nil{
                 print("register success")
-//                // UserDefault내용 전체 삭제
-//                if let appDomain = Bundle.main.bundleIdentifier {
-//                    UserDefaults.standard.removePersistentDomain(forName: appDomain)
-//                }
+                
+                guard let uid = user?.user.uid else { return }
+                let registerUser = self.ref.child("Users")
+                registerUser.child(uid).setValue(["name": UserDefaults.standard.string(forKey: "name")!,
+                                                  "uid": uid])
+                self.view.endEditing(true)
+
+                // UserDefault내용 전체 삭제
+                if let appDomain = Bundle.main.bundleIdentifier {
+                    UserDefaults.standard.removePersistentDomain(forName: appDomain)
+                }
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                let entryVC = MoveStoryboard.toVC(storybardName: "Login", identifier: "LoginViewController") as! LoginViewController
+                let navigationController = UINavigationController(rootViewController: entryVC)
+                appDelegate.window?.rootViewController = navigationController
             }
             else{
                 print("register failed")

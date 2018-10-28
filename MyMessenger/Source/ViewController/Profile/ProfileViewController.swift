@@ -14,10 +14,25 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var idLabel: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
+    
+    private var ref: DatabaseReference!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        ref = Database.database().reference()
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+//        guard let userInfo = UserServices.currentUserInfo else { return }
+        print("profileasdfasdf = \(App.userManager.userInfo)")
+//        if let user = Auth.auth().currentUser {
+//            UserServices.observerUserInfo(UserSingleton.shared.uid, completion: { (userInfo) in
+//                self.idLabel.text = user.email
+//                self.nameLabel.text = userInfo?.name as! String
+//            })
+//        }
     }
     
     deinit {

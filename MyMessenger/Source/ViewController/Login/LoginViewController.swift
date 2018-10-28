@@ -19,16 +19,17 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        ref = Database.database().reference()
         setupInitialize()
-        passwordField.delegate = self
+        ref = Database.database().reference()
+        
         //로그아웃
-        let firebaseAuth = Auth.auth()
-        do {
-            try firebaseAuth.signOut()
-        } catch let signOutError as NSError {
-            print ("Error signing out: %@", signOutError)
-        }
+//        let firebaseAuth = Auth.auth()
+//        do {
+//            try firebaseAuth.signOut()
+//        } catch let signOutError as NSError {
+//            print ("Error signing out: %@", signOutError)
+//        }
+        //
         
         if let user = Auth.auth().currentUser {
             idField.placeholder = "이미 로그인 된 상태입니다."
@@ -42,9 +43,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     func setupInitialize() {
+        self.ref = Database.database().reference()
+        
+        passwordField.delegate = self
         passwordField.isSecureTextEntry = true
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(noti:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
         
     }
     
@@ -74,17 +80,20 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         print("error = \(error)")
                         return;
                     }
-                    //                    print("token = \(token!)")
-                    //                    print("name = \(UserDefaults.standard.string(forKey: "name")!)")
-                    guard let tokens = token else { return }
-                    print("tokens = \(tokens)")
-                    let currentUser = self.ref.child("Users").child(tokens)
-                    //                    currentUser.setValue([
-                    //                        "token": tokens,
-                    //                        "name": UserDefaults.standard.string(forKey: "name")!
-                    //                        ])
+                    guard let uid = user?.user.uid else { return }
+                    UserManager.shared.uid = uid
+                    print("login uid = \(uid)")
+                    print("login uid2 = \(UserManager.shared.uid)")
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    let entryVC = MoveStoryboard.toVC(storybardName: "Profile", identifier: "ProfileViewController") as! ProfileViewController
+                    let navigationController = UINavigationController(rootViewController: entryVC)
+                    appDelegate.window?.rootViewController = navigationController
                 }
                 
+//                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//                let entryVC = MoveStoryboard.toVC(storybardName: "Profile", identifier: "ProfileViewController") as! ProfileViewController
+//                let navigationController = UINavigationController(rootViewController: entryVC)
+//                appDelegate.window?.rootViewController = navigationController
             }
             else{
                 print("login fail")
