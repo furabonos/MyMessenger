@@ -11,9 +11,13 @@ import Foundation
 class UserInfo {
     var uid: String
     var name: String
+    var mail: String
+    var url: String
     
-    init(uid: String, name: String) {
+    init(uid: String, name: String, mail: String, url: String) {
         self.uid = uid
         self.name = name
+        self.mail = mail
+        self.url = url
     }
 }

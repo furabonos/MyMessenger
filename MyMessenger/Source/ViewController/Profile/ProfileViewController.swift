@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseStorage
 
 class ProfileViewController: UIViewController {
 
@@ -25,14 +26,10 @@ class ProfileViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-//        guard let userInfo = UserServices.currentUserInfo else { return }
-        print("profileasdfasdf = \(App.userManager.userInfo)")
-//        if let user = Auth.auth().currentUser {
-//            UserServices.observerUserInfo(UserSingleton.shared.uid, completion: { (userInfo) in
-//                self.idLabel.text = user.email
-//                self.nameLabel.text = userInfo?.name as! String
-//            })
-//        }
+        print("profile = \(App.userManager.userName)")
+        idLabel.text = "\(App.userManager.userMail)"
+        nameLabel.text = "\(App.userManager.userName)"
+        
     }
     
     deinit {

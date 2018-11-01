@@ -19,8 +19,10 @@ class UserServices {
             var userInfo: UserInfo?
             if let dict = snapshot.value as? [String: Any],
                 let name = dict["name"] as? String,
-                let uid = dict["uid"] as? String{
-                userInfo = UserInfo(uid: uid, name: name)
+                let uid = dict["uid"] as? String,
+                let mail = dict["mail"] as? String,
+                let url = dict["profileURL"] as? String {
+                userInfo = UserInfo(uid: uid, name: name, mail: mail, url: url)
             }
             completion(userInfo)
         })

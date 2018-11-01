@@ -99,7 +99,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user" translatesAutoresizingMaskIntoConstraints="NO" id="jZV-di-4kJ">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userAdd" translatesAutoresizingMaskIntoConstraints="NO" id="jZV-di-4kJ">
                                 <rect key="frame" x="127" y="194" width="121" height="121"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="jZV-di-4kJ" secondAttribute="height" multiplier="1:1" id="4ot-NP-FwQ"/>
@@ -136,11 +136,23 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="최소8자이상, 대문자, 소문자, 숫자조합" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RDW-FJ-Qv5">
+                                <rect key="frame" x="98" y="525" width="180" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="Doa-kt-lJT"/>
+                                    <constraint firstAttribute="width" constant="180" id="spK-H1-ycY"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="RDW-FJ-Qv5" firstAttribute="top" secondItem="R5q-he-XJo" secondAttribute="bottom" constant="5" id="4Ha-UE-Bpd"/>
                             <constraint firstItem="mdA-Y2-e0z" firstAttribute="top" secondItem="a8X-Fy-PA2" secondAttribute="bottom" constant="30" id="7RL-RF-x3p"/>
                             <constraint firstItem="jZV-di-4kJ" firstAttribute="centerX" secondItem="RbS-Oh-Tds" secondAttribute="centerX" id="ZBb-bK-wWr"/>
+                            <constraint firstItem="RDW-FJ-Qv5" firstAttribute="centerX" secondItem="RbS-Oh-Tds" secondAttribute="centerX" id="ZWX-4c-CPQ"/>
                             <constraint firstItem="R5q-he-XJo" firstAttribute="top" secondItem="mdA-Y2-e0z" secondAttribute="bottom" constant="30" id="ibc-U8-RCs"/>
                             <constraint firstItem="a8X-Fy-PA2" firstAttribute="top" secondItem="jZV-di-4kJ" secondAttribute="bottom" constant="40" id="j1U-Tb-b2w"/>
                             <constraint firstItem="jZV-di-4kJ" firstAttribute="top" secondItem="DMz-UT-ZSx" secondAttribute="top" constant="130" id="kzo-Id-eeu"/>
@@ -166,7 +178,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n5L-XH-fbG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2254" y="-153"/>
+            <point key="canvasLocation" x="2253.5999999999999" y="-153.37331334332833"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Bot-Yv-9kL">
@@ -189,5 +201,6 @@
     </scenes>
     <resources>
         <image name="user" width="128" height="128"/>
+        <image name="userAdd" width="128" height="128"/>
     </resources>
 </document>

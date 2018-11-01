@@ -18,32 +18,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         //
-//        let authListener = Auth.auth().addStateDidChangeListener { (auth, user) in
-//            if user != nil {
-//                UserServices.observerUserInfo(user!.uid, completion: { (userInfo) in
-//                    UserServices.currentUserInfo = userInfo
-//                })
-//                let storyboard = UIStoryboard(name: "Profile", bundle: nil)
-//                let controller = storyboard.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
-//                self.window?.rootViewController = controller
-//                self.window?.makeKeyAndVisible()
-//            }else {
-//                let storyboard = UIStoryboard(name: "Login", bundle: nil)
-//                let controller = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-//                self.window?.rootViewController = controller
-//                self.window?.makeKeyAndVisible()
-//            }
+//        if let user = Auth.auth().currentUser {
+//            print("now login = \(user.uid)")
+//            UserServices.observerUserInfo(user.uid, completion: { (userInfo) in
+//                App.userManager.userName = (userInfo?.name)!
+//                App.userManager.userUid = (userInfo?.uid)!
+//                App.userManager.userMail = (userInfo?.mail)!
+//            })
+//            let storyboard = UIStoryboard(name: "Profile", bundle: nil)
+//            let controller = storyboard.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
+//            self.window?.rootViewController = controller
+//            self.window?.makeKeyAndVisible()
 //        }
-        if let user = Auth.auth().currentUser {
-            print("now login = \(user.uid)")
-            UserServices.observerUserInfo(user.uid, completion: { (userInfo) in
-                App.userManager.userInfo = (userInfo?.uid)!
-            })
-            let storyboard = UIStoryboard(name: "Profile", bundle: nil)
-            let controller = storyboard.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
-            self.window?.rootViewController = controller
-            self.window?.makeKeyAndVisible()
-        }
         //
         return true
     }

@@ -8,6 +8,10 @@
 
 import UIKit
 import MobileCoreServices
+import Firebase
+import FirebaseAuth
+import FirebaseStorage
+import NVActivityIndicatorView
 
 class ProfileEditViewController: UIViewController {
 
@@ -19,10 +23,20 @@ class ProfileEditViewController: UIViewController {
     
     let picker = UIImagePickerController()
     var selectedImage = UIImage()
+    let user = Auth.auth().currentUser
+    
+    private var ref: DatabaseReference!
+    private var activityView: NVActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupInitialize()
+        ref = Database.database().reference()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        idLabel.text = "\(App.userManager.userMail)"
     }
     
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
@@ -57,12 +71,14 @@ class ProfileEditViewController: UIViewController {
     }
     
     deinit {
+        NotificationCenter.default.removeObserver(self)
         print("ProfileEditViewController is deinit")
     }
     
     func setupInitialize() {
-        profileImageView.layer.cornerRadius = 0.5 * profileImageView.bounds.size.width
-        profileImageView.clipsToBounds = true
+        
+//        profileImageView.layer.cornerRadius = 0.5 * profileImageView.bounds.size.width
+//        profileImageView.clipsToBounds = true
         
         passwordField.isSecureTextEntry = true
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
@@ -73,6 +89,15 @@ class ProfileEditViewController: UIViewController {
         profileImageView.isUserInteractionEnabled = true
         profileImageView.addGestureRecognizer(tapGestureRecognizer)
         
+        setupActivityIndicator()
+    }
+    
+    private func setupActivityIndicator() {
+        activityView = NVActivityIndicatorView(frame: CGRect(x: self.view.center.x - 50, y: self.view.center.y - 50, width: 100, height: 100), type: NVActivityIndicatorType.circleStrokeSpin, color: UIColor(red: 0/255.0, green: 132/255.0, blue: 137/255.0, alpha: 1), padding: 25)
+        
+        activityView.backgroundColor = .white
+        activityView.layer.cornerRadius = 10
+        self.view.addSubview(activityView)
     }
     
     @objc func keyboardWillShow(_ sender: Notification) {
@@ -87,9 +112,55 @@ class ProfileEditViewController: UIViewController {
     }
 
     @IBAction func editBtn(_ sender: Any) {
-        if (passwordField.text?.passwordReg())! {
-            print("correct pwd")
+        activityView.startAnimating()
+        let storageRef = Storage.storage().reference().child("\(App.userManager.userUid)/profileImage")
+        if let uploadData = UIImagePNGRepresentation(self.profileImageView.image!) {
+            storageRef.putData(uploadData, metadata: nil, completion: { (metadata, error) in
+                if error != nil {
+                    print("error = \(error)")
+                    return
+                }
+                print("metadata = \(metadata)")
+                storageRef.downloadURL(completion: { (url, error) in
+                    if let error = error {
+                        print("urlerror = \(error)")
+                    }else {
+                        guard let url = url else { return }
+                        let userRef = self.ref.child("Users").child(App.userManager.userUid)
+                        userRef.updateChildValues(["profileURL": "\(url)"])
+                        self.activityView.stopAnimating()
+                    }
+                })
+            })
         }
+        
+        //
+//        let currentUser = self.ref.child("Users").child(App.userManager.userUid)
+//        currentUser.updateChildValues(["name": nameField.text!])
+        //
+//        if (passwordField.text?.passwordReg())! {
+//        user?.updatePassword(to: passwordField.text!) { (error) in
+//            if let error = error {
+//                print("error")
+//                //
+//                let alertController = UIAlertController(title: "경고",message: "수정에 실패하였습니다.", preferredStyle: UIAlertControllerStyle.alert)
+//                let cancelButton = UIAlertAction(title: "확인", style: UIAlertActionStyle.cancel, handler: nil)
+//                alertController.addAction(cancelButton)
+//                self.present(alertController,animated: true,completion: nil)
+//                //
+//            }else {
+//                print("change")
+//                //
+//                let alertController = UIAlertController(title: "확인",message: "수정에 성공하였습니다.", preferredStyle: UIAlertControllerStyle.alert)
+//                let cancelButton = UIAlertAction(title: "확인", style: UIAlertActionStyle.cancel, handler: nil)
+//                alertController.addAction(cancelButton)
+//                self.present(alertController,animated: true,completion: nil)
+//                //
+//            }
+//        }
+//            }else {
+//
+//            }
     }
     
 

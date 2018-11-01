@@ -37,6 +37,7 @@ class RegisterNameViewController: UIViewController {
     
     func setupInitialize() {
         ref = Database.database().reference()
+
 //        goBtn.isEnabled = false
 //        goBtn.setTitleColor(.gray, for: .normal)
     }
@@ -89,15 +90,16 @@ class RegisterNameViewController: UIViewController {
     
     @IBAction func goBtn(_ sender: Any) {
         UserDefaults.standard.set(nameField.text, forKey: "name")
-        Auth.auth().createUser(withEmail: UserDefaults.standard.string(forKey: "email")!, password: UserDefaults.standard.string(forKey: "password")!
-        ) { (user, error) in
-            if user !=  nil{
+        
                 print("register success")
                 
-                guard let uid = user?.user.uid else { return }
+                
                 let registerUser = self.ref.child("Users")
-                registerUser.child(uid).setValue(["name": UserDefaults.standard.string(forKey: "name")!,
-                                                  "uid": uid])
+                
+                registerUser.child(UserDefaults.standard.string(forKey: "uid")!).setValue(
+                    ["name": UserDefaults.standard.string(forKey: "name")!,
+                     "uid": UserDefaults.standard.string(forKey: "uid")!,
+                     "mail": UserDefaults.standard.string(forKey: "email")!])
                 self.view.endEditing(true)
 
                 // UserDefault내용 전체 삭제
@@ -108,10 +110,7 @@ class RegisterNameViewController: UIViewController {
                 let entryVC = MoveStoryboard.toVC(storybardName: "Login", identifier: "LoginViewController") as! LoginViewController
                 let navigationController = UINavigationController(rootViewController: entryVC)
                 appDelegate.window?.rootViewController = navigationController
-            }
-            else{
-                print("register failed")
-            }
+            
         }
-    }
+    
 }

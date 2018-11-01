@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
+import NVActivityIndicatorView
 
 class RegisterViewController: UIViewController {
 
@@ -16,6 +19,9 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var passwordImage: UIImageView!
+    
+    private var ref: DatabaseReference!
+    private var activityView: NVActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,9 +48,19 @@ class RegisterViewController: UIViewController {
     }
     
     func setupInitialize() {
+        ref = Database.database().reference()
         goBtn.isEnabled = false
         goBtn.setTitleColor(.gray, for: .normal)
         passwordField.isSecureTextEntry = true
+        setupActivityIndicator()
+    }
+    
+    private func setupActivityIndicator() {
+        activityView = NVActivityIndicatorView(frame: CGRect(x: self.view.center.x - 50, y: self.view.center.y - 50, width: 100, height: 100), type: NVActivityIndicatorType.circleStrokeSpin, color: UIColor(red: 0/255.0, green: 132/255.0, blue: 137/255.0, alpha: 1), padding: 25)
+        
+        activityView.backgroundColor = .white
+        activityView.layer.cornerRadius = 10
+        self.view.addSubview(activityView)
     }
     
     @IBAction func closeBtn(_ sender: Any) {
@@ -54,9 +70,31 @@ class RegisterViewController: UIViewController {
     @IBAction func nextBtn(_ sender: Any) {
         UserDefaults.standard.set(emailField.text, forKey: "email")
         UserDefaults.standard.set(passwordField.text, forKey: "password")
-        
-        let registerNameVC = MoveStoryboard.toVC(storybardName: "Register", identifier: "RegisterNameViewController")
-        self.navigationController?.pushViewController(registerNameVC, animated: true)
+        activityView!.startAnimating()
+        //
+        Auth.auth().createUser(withEmail: UserDefaults.standard.string(forKey: "email")!, password: UserDefaults.standard.string(forKey: "password")!
+        ) { (user, error) in
+            if user !=  nil{
+                print("register success")
+                guard let uid = user?.user.uid else { return }
+                UserDefaults.standard.set(uid, forKey: "uid")
+                self.view.endEditing(true)
+                self.activityView.stopAnimating()
+                let registerNameVC = MoveStoryboard.toVC(storybardName: "Register", identifier: "RegisterNameViewController")
+                self.navigationController?.pushViewController(registerNameVC, animated: true)
+            }
+            else{
+                print("register failed")
+                self.activityView.stopAnimating()
+                //
+                let alertController = UIAlertController(title: "경고",message: "중복된 이메일이 있습니다.", preferredStyle: UIAlertControllerStyle.alert)
+                let cancelButton = UIAlertAction(title: "확인", style: UIAlertActionStyle.cancel, handler: nil)
+                alertController.addAction(cancelButton)
+                self.present(alertController,animated: true,completion: nil)
+                //
+            }
+        }
+        //
         
     }
     
